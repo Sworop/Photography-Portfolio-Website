@@ -1,29 +1,33 @@
-  function fetchcontact()
-{
-    fetch("http://localhost:3000/contact")
-    .then(res => res.json())
-    .then(res => {
-        const gallery =document.querySelector("#contact")
-        gallery.innerHTML = res.data.map(i =>
-    ` <div style="width: 30%; 
-              margin-bottom: 20px; 
-              margin-left: 20px;
-              border-radius: 10px; border: 2px solid black; font-weight: 500; 
-              background-color: #0e0a3f;" class="imgContainer"> 
-            <div><h3 style=" color: rgba(255, 255, 255, 1); text-align: centre;">
-             Message Box</h3></div>
-            <p style="  color: rgba(255, 255, 255, 1); text-align: left;">
-            Name: ${i.username}</p>
-            <p style=" color: rgba(255, 255, 255, 1); text-align: left;">
-            Email Address: ${i.email}</p>
-            <p style=" color: rgba(255, 255, 255, 1); text-align: left;">
-            Phone Number: ${i.phone}</p>
-            <p style=" color: rgba(255, 255, 255, 1); text-align: left;">
-            Message: ${i.message}</p>
-    </div>`
+ document.querySelector('#contactForm').addEventListener('submit', (e) => {
+    e.preventDefault()
+    
+    const i1 = document.querySelector('#i1')
+    const i2 = document.querySelector('#i2')
+    const i3 = document.querySelector('#i3')
+    const i4 = document.querySelector('#i4')
 
-        ).join("")
+    fetch("http://localhost:3000/contact", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        }, 
+        body:JSON.stringify({
+            username:i1.value,
+            email: i2.value,
+            phone: i3.value,
+            message: i4.value
+        })
+    })
+    
+    .then(res => res.json())
+    .then( res => {
+       console.log("Saved to DB:", data)
+        i1.value = ""
+        i2.value = ""
+        i3.value = ""
     })
     .catch(err => console.log(err))
-}
-fetchcontact()
+    
+
+    
+})
