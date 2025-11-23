@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+
+</head>
+
+<body>
+     <div class="login-container">
+    <form class="login-box" onsubmit="return OnAdd(event)">
+      <h2>Login</h2>
+      <input id="username" type="text" placeholder="Username" required>
+      <input id="password" type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <h5><a href="">Forget Password</a></h5>
+      <a href="signup.html">Create an Account</a>
+    </form>
+    <script>
+
+  function validateForm() {
+    let username = document.querySelector("#username").value;
+    let password = document.querySelector("#password").value;
+
+    if (username === "" || password === "") {
+      alert("Please fill in all fields");
+      return false;
+    }
+    return true;
+  }
+
+  function OnAdd(event) {
+    if (event) event.preventDefault();
+    if (validateForm()) {
+      window.location.href = "adminpanel.html";
+      return false; // prevent form from submitting traditionally
+    }
+    return false; // prevent form submission if validation fails
+  }
+</script>
+</body>
+</html>
